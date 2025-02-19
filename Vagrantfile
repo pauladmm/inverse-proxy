@@ -14,6 +14,7 @@ Vagrant.configure("2") do |config|
       proxy.vm.network "private_network",ip: "192.168.57.10"
       proxy.vm.provision "shell", inline: <<-SHELL
         cp /vagrant/files/proxy/default /etc/nginx/sites-available/default
+        cp /vagrant/files/proxy/hosts /etc/hosts
         systemctl restart nginx
       SHELL
     end

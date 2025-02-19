@@ -52,3 +52,48 @@ server {
     }
 }
 ```
+
+# COMPROBATION
+
+## Server Name
+
+At this moment, we would be able to access to the index.html through the proxy server name.
+
+![Server Access](files/img/proxy-server-test.png)
+
+## Logs
+
+This also can be checked in the command line:
+
+![Proxy Logs](files/img/logs-proxy.PNG)
+
+![Server Logs](files/img/logs-server.PNG)
+
+## Headers
+
+With developer tools help, headers can be checked also.
+Header request host is the same name as the proxy one. This indicates that proxy is doing the request to the server.
+
+![Header proxy request](files/img/header-example-test.PNG)
+
+### Adding headers
+
+Headers can be modified adding to the server block / location the following:
+
+On proxy side
+
+```
+location / {
+     proxy_pass http://192.168.57.11:8080;
+     add_header X-friend Paula;
+}
+```
+
+On server side
+
+```
+location / {
+     add_header Host w1.example.test;
+     try_files $uri $uri/ =404;
+ }
+```
